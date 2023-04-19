@@ -30,6 +30,7 @@ input{
     font-size: 24pt;
 }
 p {
+    user-select: none;
     background: #ccffaa ;
     font-weight: lighter;
     color: #77cc77;
