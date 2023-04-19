@@ -77,6 +77,7 @@ class Slabsprak {
             out[2] += glyph.bottom.to_array()[0].join("")
             out[3] += glyph.bottom.to_array()[1].join("")
 
+            if (letter == " ") { continue; }
             glyph = new Glyph(" ")
             out[0] += glyph.top.to_array()[0].join("")
             out[1] += glyph.top.to_array()[1].join("")
@@ -115,7 +116,7 @@ function updateValue(e) {
 }
 
 function translate(string){
-    let lines = new Slabsprak(string.toLowerCase().replace(/\W/g, '')).to_string()
+    let lines = new Slabsprak(string.toLowerCase().replace(/[^A-z0-9\s]/g, '')).to_string()
     line.textContent = lines[0] + "\n" +
         lines[1] + "\n" +
         lines[2] + "\n" +
