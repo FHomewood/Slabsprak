@@ -1,19 +1,40 @@
 <!DOCTYPE html>
-<html lang="">
-<meta charset="UTF-8">
-<head>
+<html lang="en" class="h-full w-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Slabsprak</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-<input autofocus="true" placeholder="get your snacks" onload="Slabsprak" name="name"/>
-<div class="wrapper">
-    <div class="box">
-        <p id="values"></p>
+    <!-- Enable for dev, compile to production after -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="tailwind.min.css" />
+    <link rel="stylesheet" href="utilities.min.css" />
+  </head>
+  <body class="h-full w-full flex flex-col bg-[#ccffaa]">
+    <h1 class="font-bold text-3xl text-center mt-4">Slabsprak</h1>
+    <div class="h-full w-full flex flex-col justify-around items-center">
+      <input
+        id="input"
+        autofocus="true"
+        placeholder="get your snacks"
+        class="outline-0 border bg-[#bbee99] border-1 rounded-md p-2"
+      />
+      <div
+        class="overflow-hidden p-2 tracking-tighter select-none overflow-x-auto w-full"
+      >
+        <p
+          id="output"
+          class="h-12 text-center whitespace-pre font-mono text-[20pt] leading-3"
+        ></p>
+      </div>
     </div>
-</div>
-</body>
-
-<script src="slabsprak.js"></script>
+    <footer class="bg-white border-t-1 p-3 flex flex-col items-center">
+      <a
+        href="https://github.com/FHomewood/Slabsprak"
+        class="flex items-center gap-1"
+        ><img width="20" height="20" src="./github-mark.svg" />GitHub</a
+      >
+    </footer>
+    <script src="slabsprak.js"></script>
+  </body>
 </html>
