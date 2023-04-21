@@ -1,30 +1,12 @@
 class Piece {
   SHAPES = {
-    d: [
-      [1, 1],
-      [0, 1],
-    ],
-    f: [
-      [1, 1],
-      [1, 0],
-    ],
-    h: [
-      [1, 0],
-      [1, 1],
-    ],
-    j: [
-      [0, 1],
-      [1, 1],
-    ],
-    c: [
-      [1, 1],
-      [0, 0],
-    ],
-    x: [
-      [0, 0],
-      [1, 1],
-    ],
-    " ": [[0], [0]],
+    "d": [[1, 1], [0, 1],],
+    "f": [[1, 1], [1, 0],],
+    "h": [[1, 0], [1, 1],],
+    "j": [[0, 1], [1, 1],],
+    "c": [[1, 1], [0, 0],],
+    "x": [[0, 0], [1, 1],],
+    " ": [],
   };
 
   shape;
@@ -40,44 +22,45 @@ class Piece {
 
 class Glyph {
   ALPHABET = {
-    a: ["x", "h"],
-    b: ["j", "h"],
-    c: ["c", "h"],
-    d: ["f", "h"],
-    e: ["h", "h"],
-    f: ["d", "h"],
-    g: ["x", "f"],
-    h: ["j", "f"],
-    i: ["c", "f"],
-    j: ["f", "f"],
-    k: ["h", "f"],
-    l: ["d", "f"],
-    m: ["x", "d"],
-    n: ["j", "d"],
-    o: ["c", "d"],
-    p: ["f", "d"],
-    q: ["h", "d"],
-    r: ["d", "d"],
-    s: ["x", "j"],
-    t: ["j", "j"],
-    u: ["c", "j"],
-    v: ["j", "j"],
-    w: ["h", "j"],
-    x: ["d", "j"],
-    y: ["x", "x"],
-    z: ["j", "x"],
-    1: ["c", "x"],
-    2: ["f", "x"],
-    3: ["h", "x"],
-    4: ["d", "x"],
-    5: ["x", "c"],
-    6: ["j", "c"],
-    7: ["c", "c"],
-    8: ["f", "c"],
-    9: ["h", "c"],
-    0: ["d", "c"],
+    "a": ["x", "h"],
+    "b": ["j", "h"],
+    "c": ["c", "h"],
+    "d": ["f", "h"],
+    "e": ["h", "h"],
+    "f": ["d", "h"],
+    "g": ["x", "f"],
+    "h": ["j", "f"],
+    "i": ["c", "f"],
+    "j": ["f", "f"],
+    "k": ["h", "f"],
+    "l": ["d", "f"],
+    "m": ["x", "d"],
+    "n": ["j", "d"],
+    "o": ["c", "d"],
+    "p": ["f", "d"],
+    "q": ["h", "d"],
+    "r": ["d", "d"],
+    "s": ["x", "j"],
+    "t": ["j", "j"],
+    "u": ["c", "j"],
+    "v": ["j", "j"],
+    "w": ["h", "j"],
+    "x": ["d", "j"],
+    "y": ["x", "x"],
+    "z": ["j", "x"],
+    "1": ["c", "x"],
+    "2": ["f", "x"],
+    "3": ["h", "x"],
+    "4": ["d", "x"],
+    "5": ["x", "c"],
+    "6": ["j", "c"],
+    "7": ["c", "c"],
+    "8": ["f", "c"],
+    "9": ["h", "c"],
+    "0": ["d", "c"],
     " ": [" ", " "],
   };
+
   top;
   bottom;
 
@@ -113,60 +96,50 @@ class Slabsprak {
     return glyphs;
   }
 
-  to_array() {
-    var out = [[], [], [], []];
+  update_output(el){
     for (
       let letter_index = 0;
       letter_index < this.latin_string.length;
       letter_index++
-    ) {
+    ) 
+    {
       let letter = this.latin_string[letter_index];
       var glyph = new Glyph(letter);
-      out[0] += glyph.top.to_array()[0].join("");
-      out[1] += glyph.top.to_array()[1].join("");
-      out[2] += glyph.bottom.to_array()[0].join("");
-      out[3] += glyph.bottom.to_array()[1].join("");
 
-      if (letter == " ") {
-        continue;
-      }
-      glyph = new Glyph(" ");
-      out[0] += glyph.top.to_array()[0].join("");
-      out[1] += glyph.top.to_array()[1].join("");
-      out[2] += glyph.bottom.to_array()[0].join("");
-      out[3] += glyph.bottom.to_array()[1].join("");
-    }
-    return out;
-  }
+      const letter_el = document.createElement("span");
+      letter_el.className = "letter";
 
-  to_string() {
-    var sprak = ["", "", "", ""];
-    let ind = 0;
-    const arr = this.to_array();
-    for (let line = 0; line < arr.length; line++) {
-      for (let block = 0; block < arr[line].length; block++) {
-        let i = arr[line][block];
-        if (i === "1") {
-          sprak[ind] += "■";
-        } else {
-          sprak[ind] += "□";
+      for (let i = 0; i < glyph.top.to_array().length; i++){
+        const arr = glyph.top.to_array()[i]
+        for (let j = 0; j < arr.length; j++){
+          let class_names = ['cell light', 'cell dark'];
+          let cell = document.createElement("span");
+          cell.className = class_names[arr[j]]
+          letter_el.appendChild(cell)
         }
       }
-      ind++;
+      for (let i = 0; i < glyph.bottom.to_array().length; i++){
+        const arr = glyph.bottom.to_array()[i]
+        for (let j = 0; j < arr.length; j++){
+          let class_names = ['cell light', 'cell dark'];
+          let cell = document.createElement("span");
+          cell.className = class_names[arr[j]]
+          letter_el.appendChild(cell)
+        }
+      }
+      
+      el.appendChild(letter_el)
     }
-    return sprak;
   }
 }
 
+const el = document.getElementById("cells-wrapper");
 const input = document.getElementById("input");
 input.addEventListener("load", () => Slabsprak);
-input.addEventListener("input", (e) => translate(e.target.value));
-const line = document.getElementById("output");
+input.addEventListener("input", (e) => translate(e.target.value, el));
 
-function translate(string) {
-  let lines = new Slabsprak(
-    string.toLowerCase().replace(/[^A-z0-9\s]/g, "")
-  ).to_string();
-  line.textContent =
-    lines[0] + "\n" + lines[1] + "\n" + lines[2] + "\n" + lines[3];
+function translate(string, el) {
+  let clean_string = string.toLowerCase().replace(/[^A-z0-9\s]/g, "")
+  el.innerHTML = ""
+  new Slabsprak(clean_string).update_output(el);
 }

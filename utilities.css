@@ -127,3 +127,22 @@
 .font-thin{
   font-weight: 100;
 }
+.cell{
+  width: 1em;
+  height: 1em;
+}
+.light{
+  background: transparent;
+}
+.dark{
+  background: #227722;
+}
+.letter{
+  width: 2.5em;
+  height: 4em;
+  display: inline-grid;
+  grid-template-columns: 1em 1em;
+}
+#cells-wrapper{
+  text-align: center;
+}
