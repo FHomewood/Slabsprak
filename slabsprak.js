@@ -149,7 +149,7 @@ class Slabsprak {
         if (i === "1") {
           sprak[ind] += "■";
         } else {
-          sprak[ind] += " ";
+          sprak[ind] += "·";
         }
       }
       ind++;
