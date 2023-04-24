@@ -1,15 +1,31 @@
 class Piece {
   SHAPES = {
-    "d": [[1, 1], [0, 1],],
-    "f": [[1, 1], [1, 0],],
-    "h": [[1, 0], [1, 1],],
-    "j": [[0, 1], [1, 1],],
-    "c": [[1, 1], [0, 0],],
-    "x": [[0, 0], [1, 1],],
-    " ": [],
+    "stair-top-right": [
+      [1, 1],
+      [0, 1],
+    ],
+    "stair-top-left": [
+      [1, 1],
+      [1, 0],
+    ],
+    "stair-bottom-left": [
+      [1, 0],
+      [1, 1],
+    ],
+    "stair-bottom-right": [
+      [0, 1],
+      [1, 1],
+    ],
+    "upper-slab": [
+      [1, 1],
+      [0, 0],
+    ],
+    "lower-slab": [
+      [0, 0],
+      [1, 1],
+    ],
+    "empty": [],
   };
-
-  shape;
 
   constructor(shape) {
     this.shape = shape;
@@ -22,47 +38,44 @@ class Piece {
 
 class Glyph {
   ALPHABET = {
-    "a": ["x", "h"],
-    "b": ["j", "h"],
-    "c": ["c", "h"],
-    "d": ["f", "h"],
-    "e": ["h", "h"],
-    "f": ["d", "h"],
-    "g": ["x", "f"],
-    "h": ["j", "f"],
-    "i": ["c", "f"],
-    "j": ["f", "f"],
-    "k": ["h", "f"],
-    "l": ["d", "f"],
-    "m": ["x", "d"],
-    "n": ["j", "d"],
-    "o": ["c", "d"],
-    "p": ["f", "d"],
-    "q": ["h", "d"],
-    "r": ["d", "d"],
-    "s": ["x", "j"],
-    "t": ["j", "j"],
-    "u": ["c", "j"],
-    "v": ["j", "j"],
-    "w": ["h", "j"],
-    "x": ["d", "j"],
-    "y": ["x", "x"],
-    "z": ["j", "x"],
-    "1": ["c", "x"],
-    "2": ["f", "x"],
-    "3": ["h", "x"],
-    "4": ["d", "x"],
-    "5": ["x", "c"],
-    "6": ["j", "c"],
-    "7": ["c", "c"],
-    "8": ["f", "c"],
-    "9": ["h", "c"],
-    "0": ["d", "c"],
-    " ": [" ", " "],
+    "a": ["lower-slab", "stair-bottom-left"],
+    "b": ["stair-bottom-right", "stair-bottom-right"],
+    "c": ["upper-slab", "stair-bottom-left"],
+    "d": ["stair-top-left", "stair-bottom-left"],
+    "e": ["stair-bottom-left", "stair-bottom-left"],
+    "f": ["stair-top-right", "stair-bottom-left"],
+    "g": ["lower-slab", "stair-top-left"],
+    "h": ["stair-bottom-right", "stair-top-left"],
+    "i": ["stair-bottom-left", "stair-top-right"],
+    "j": ["stair-top-left", "stair-top-left"],
+    "k": ["stair-bottom-left", "stair-top-left"],
+    "l": ["stair-top-right", "stair-top-left"],
+    "m": ["lower-slab", "stair-top-right"],
+    "n": ["stair-bottom-right", "stair-top-right"],
+    "o": ["upper-slab", "stair-top-right"],
+    "p": ["stair-top-left", "stair-top-right"],
+    "q": ["upper-slab", "stair-top-left"],
+    "r": ["stair-top-right", "stair-top-right"],
+    "s": ["lower-slab", "stair-bottom-right"],
+    "t": ["stair-bottom-right", "stair-bottom-left"],
+    "u": ["upper-slab", "stair-bottom-right"],
+    "v": ["stair-bottom-right", "stair-bottom-right"],
+    "w": ["stair-bottom-left", "stair-bottom-right"],
+    "x": ["stair-top-right", "stair-bottom-right"],
+    "y": ["lower-slab", "lower-slab"],
+    "z": ["stair-bottom-right", "lower-slab"],
+    "1": ["upper-slab", "lower-slab"],
+    "2": ["stair-top-left", "lower-slab"],
+    "3": ["stair-bottom-left", "lower-slab"],
+    "4": ["stair-top-right", "lower-slab"],
+    "5": ["lower-slab", "upper-slab"],
+    "6": ["stair-bottom-right", "upper-slab"],
+    "7": ["upper-slab", "upper-slab"],
+    "8": ["stair-top-left", "upper-slab"],
+    "9": ["stair-bottom-left", "upper-slab"],
+    "0": ["stair-top-right", "upper-slab"],
+    " ": ["empty", "empty"],
   };
-
-  top;
-  bottom;
 
   constructor(latin_glyph) {
     this.top = this.get_top_glyph(latin_glyph);
@@ -81,7 +94,6 @@ class Glyph {
 }
 
 class Slabsprak {
-  latin_string;
 
   constructor(latin_string) {
     this.latin_string = latin_string;
@@ -135,7 +147,6 @@ class Slabsprak {
 
 const el = document.getElementById("cells-wrapper");
 const input = document.getElementById("input");
-input.addEventListener("load", () => Slabsprak);
 input.addEventListener("input", (e) => translate(e.target.value, el));
 
 function translate(string, el) {
