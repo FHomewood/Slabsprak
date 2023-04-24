@@ -6,8 +6,8 @@
   display: flex;
 }
 
-.h-12 {
-  height: 3rem;
+.h-2\/5 {
+  height: 40%;
 }
 
 .h-full {
@@ -43,12 +43,8 @@
   overflow: hidden;
 }
 
-.overflow-x-auto {
-  overflow-x: auto;
-}
-
-.whitespace-pre {
-  white-space: pre;
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .rounded-md {
@@ -72,12 +68,12 @@
   padding: 0.75rem;
 }
 
-.text-center {
-  text-align: center;
+.p-5 {
+  padding: 1.25rem;
 }
 
-.font-mono {
-  font-family: monospace, monospace;
+.text-center {
+  text-align: center;
 }
 
 .text-3xl {
@@ -85,20 +81,8 @@
   line-height: 2.25rem;
 }
 
-.text-\[20pt\] {
-  font-size: 20pt;
-}
-
 .font-thin {
   font-weight: 100;
-}
-
-.leading-3 {
-  line-height: 0.75rem;
-}
-
-.tracking-tighter {
-  letter-spacing: -0.05em;
 }
 
 .text-\[\#229922\] {
