@@ -1,5 +1,5 @@
 class Piece {
-  SHAPES = {
+  Shapes = {
     "stair-top-right": [
       [1, 1],
       [0, 1],
@@ -24,20 +24,20 @@ class Piece {
       [0, 0],
       [1, 1],
     ],
-    "empty": [],
+    empty: [],
   };
 
   constructor(shape) {
     this.shape = shape;
   }
 
-  to_array() {
-    return this.SHAPES[this.shape];
+  toArray() {
+    return this.Shapes[this.shape];
   }
 }
 
 class Glyph {
-  ALPHABET = {
+  Alphabet = {
     "a": ["lower-slab", "stair-bottom-left"],
     "b": ["stair-bottom-right", "stair-bottom-right"],
     "c": ["upper-slab", "stair-bottom-left"],
@@ -78,28 +78,27 @@ class Glyph {
   };
 
   constructor(latin_glyph) {
-    this.top = this.get_top_glyph(latin_glyph);
-    this.bottom = this.get_bottom_glyph(latin_glyph);
+    this.top = this.getTop(latin_glyph);
+    this.bottom = this.getBottom(latin_glyph);
   }
 
-  get_top_glyph(latin_glyph) {
-    var shapes = this.ALPHABET[latin_glyph];
+  getTop(latin_glyph) {
+    var shapes = this.Alphabet[latin_glyph];
     return new Piece(shapes[0]);
   }
 
-  get_bottom_glyph(latin_glyph) {
-    var shapes = this.ALPHABET[latin_glyph];
+  getBottom(latin_glyph) {
+    var shapes = this.Alphabet[latin_glyph];
     return new Piece(shapes[1]);
   }
 }
 
 class Slabsprak {
-
   constructor(latin_string) {
     this.latin_string = latin_string;
   }
 
-  get_letters() {
+  getLetters() {
     var glyphs = [];
     for (let glyph of this.latin_string) {
       glyphs += new Glyph(glyph);
@@ -108,49 +107,48 @@ class Slabsprak {
     return glyphs;
   }
 
-  update_output(el){
+  toHTML() {
+    const container = document.createElement("div");
     for (
       let letter_index = 0;
       letter_index < this.latin_string.length;
       letter_index++
-    ) 
-    {
+    ) {
       let letter = this.latin_string[letter_index];
       var glyph = new Glyph(letter);
 
       const letter_el = document.createElement("span");
       letter_el.className = "letter";
 
-      for (let i = 0; i < glyph.top.to_array().length; i++){
-        const arr = glyph.top.to_array()[i]
-        for (let j = 0; j < arr.length; j++){
-          let class_names = ['cell light', 'cell dark'];
+      for (let i = 0; i < glyph.top.toArray().length; i++) {
+        const arr = glyph.top.toArray()[i];
+        for (let j = 0; j < arr.length; j++) {
+          let class_names = ["cell light", "cell dark"];
           let cell = document.createElement("span");
-          cell.className = class_names[arr[j]]
-          letter_el.appendChild(cell)
+          cell.className = class_names[arr[j]];
+          letter_el.appendChild(cell);
         }
       }
-      for (let i = 0; i < glyph.bottom.to_array().length; i++){
-        const arr = glyph.bottom.to_array()[i]
-        for (let j = 0; j < arr.length; j++){
-          let class_names = ['cell light', 'cell dark'];
+      for (let i = 0; i < glyph.bottom.toArray().length; i++) {
+        const arr = glyph.bottom.toArray()[i];
+        for (let j = 0; j < arr.length; j++) {
+          let class_names = ["cell light", "cell dark"];
           let cell = document.createElement("span");
-          cell.className = class_names[arr[j]]
-          letter_el.appendChild(cell)
+          cell.className = class_names[arr[j]];
+          letter_el.appendChild(cell);
         }
       }
-      
-      el.appendChild(letter_el)
+      container.appendChild(letter_el);
     }
+    return container.innerHTML;
   }
 }
 
-const el = document.getElementById("cells-wrapper");
+const out = document.getElementById("output");
 const input = document.getElementById("input");
-input.addEventListener("input", (e) => translate(e.target.value, el));
+input.addEventListener("input", (e) => translate(e.target.value, out));
 
-function translate(string, el) {
-  let clean_string = string.toLowerCase().replace(/[^A-z0-9\s]/g, "")
-  el.innerHTML = ""
-  new Slabsprak(clean_string).update_output(el);
+function translate(string, element) {
+  let clean_string = string.toLowerCase().replace(/[^A-z0-9\s]/g, "");
+  element.innerHTML = new Slabsprak(clean_string).toHTML(element);
 }

@@ -9,31 +9,30 @@
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link rel="stylesheet" href="tailwind.min.css" />
     <link rel="stylesheet" href="utilities.min.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="h-full w-full flex flex-col bg-[#ccffaa] text-dark">
+  <body class="h-full w-full flex flex-col bg-[#ccffaa] text-[#229922]">
     <h1 class="text-3xl font-thin text-center mt-4">Slabsprak</h1>
-    <div class="h-full w-full flex flex-col justify-around items-center">
+    <div class="h-full flex flex-col justify-around items-center">
       <input
         id="input"
         autofocus="true"
         placeholder="get your snacks"
-        class="text-center outline-none bg-[#ccffaa] rounded-md p-2"
+        class="text-center outline-0 no-outline bg-transparent rounded-md p-2"
       />
       <div
-        class="overflow-hidden p-2 tracking-tighter select-none overflow-x-auto w-full"
+        class="overflow-hidden p-5 text-center h-2/5 select-none overflow-y-auto w-full"
       >
-        <div id="cells-wrapper" class="p-3">
-        </div>
+        <div id="output"></div>
       </div>
     </div>
-
-    <div class="p-3 flex">
+    <footer class="p-3 flex flex-col">
       <a
         href="https://github.com/FHomewood/Slabsprak"
-        class="flex gap-1"
-        ><img width="23" height="20" src="./github-mark.svg" class="text-[#449944]"/>GitHub</a
+        class="flex gap-1 items-center"
+        ><img width="20" height="20" src="./github-mark.svg" />GitHub</a
       >
     </footer>
-    <script src="slabsprak.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

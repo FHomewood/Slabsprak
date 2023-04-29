@@ -1,0 +1,18 @@
+.cell {
+  width: 1em;
+  height: 1em;
+}
+.light {
+  background: transparent;
+}
+.dark {
+  background: #227722;
+}
+.letter {
+  width: 2.5em;
+  display: inline-grid;
+  grid-template-columns: 1em 1em;
+}
+.no-outline {
+  outline: none;
+}

@@ -10,8 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add readme and changelog
+- TailwindCSS
 
 ### Changed
 
-- Corrected the letters for `exit`.
+- Correct the letters for `exit`.
 - Use descriptive glyph names for easy understanding
+- Rename slabsprak.js to script.js
+
+### Fixed
+
+- Mixed TailwindCSS and custom styles
