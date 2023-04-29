@@ -13,3 +13,6 @@
   display: inline-grid;
   grid-template-columns: 1em 1em;
 }
+.no-outline {
+  outline: none;
+}
