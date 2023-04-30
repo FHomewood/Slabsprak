@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Different alphabets (including an EthoSlab purist)
 - full-block and air-block glyphs for some alphabets
+- Dropdown for selecting alphabet
+
+### Changed
+
+- GitHub link now only covers the icon, not the whole footer
+- Refactor script.js
 
 ## [0.1.0] - 2023-04-29
 

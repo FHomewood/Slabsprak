@@ -46,11 +46,11 @@ class Piece {
 class Alphabet{
   constructor() {}
 
-  get_alphabet(author){
-    if (author === "ethoslab") {return this.alphabet_ethoslab();}
-    else if (author === "ateijelo") {return this.alphabet_ateijelo();}
-    else if (author === "dms_akshat") {return this.alphabet_dms_akshat();}
-    else if (author === "homewood") {return this.alphabet_homewood();}
+  get_alphabet(){
+    if (author === 0) {return this.alphabet_ethoslab();}
+    else if (author === 1) {return this.alphabet_ateijelo();}
+    else if (author === 2) {return this.alphabet_dms_akshat();}
+    else if (author === 3) {return this.alphabet_homewood();}
     return
   }
 
@@ -232,24 +232,22 @@ class Glyph {
   }
 
   getTop(latin_glyph) {
-    var shapes = new Alphabet().get_alphabet(author)[latin_glyph];
+    var shapes = new Alphabet().get_alphabet()[latin_glyph];
     return new Piece(shapes[0]);
   }
 
   getBottom(latin_glyph) {
-    var shapes = new Alphabet().get_alphabet(author)[latin_glyph];
+    var shapes = new Alphabet().get_alphabet()[latin_glyph];
     return new Piece(shapes[1]);
   }
 }
 
 class Slabsprak {
-  constructor(latin_string, author) {
-    this.latin_string = latin_string;
-  }
+  constructor() {}
 
   getLetters() {
     var glyphs = [];
-    for (let glyph of this.latin_string) {
+    for (let glyph of input_string) {
       glyphs += new Glyph(glyph);
       glyphs += new Glyph(" ");
     }
@@ -260,10 +258,10 @@ class Slabsprak {
     const container = document.createElement("div");
     for (
       let letter_index = 0;
-      letter_index < this.latin_string.length;
+      letter_index < input_string.length;
       letter_index++
     ) {
-      let letter = this.latin_string[letter_index];
+      let letter = input_string[letter_index];
       var glyph = new Glyph(letter);
 
       const letter_el = document.createElement("span");
@@ -295,10 +293,25 @@ class Slabsprak {
 
 const out = document.getElementById("output");
 const input = document.getElementById("input");
-let author = "ethoslab"
-input.addEventListener("input", (e) => translate(e.target.value,author, out));
+const dropdown = document.getElementById("dropdown");
 
-function translate(string, author, element) {
-  let clean_string = string.toLowerCase().replace(/[^A-z0-9\s]/g, "");
-  element.innerHTML = new Slabsprak(clean_string, author).toHTML(element);
+let input_string = input.value.toLowerCase().replace(/[^A-z0-9\s]/g, "");
+let author = dropdown.options.selectedIndex;
+update_output()
+
+input.addEventListener("input", (e) => input_listener());
+dropdown.addEventListener("click", (e) => dropdown_listener());
+
+function input_listener(){
+  input_string = input.value.toLowerCase().replace(/[^A-z0-9\s]/g, "");
+  update_output();
+}
+
+function dropdown_listener(){
+  author = dropdown.options.selectedIndex;
+  update_output();
+}
+
+function update_output() {
+  out.innerHTML = new Slabsprak().toHTML();
 }
