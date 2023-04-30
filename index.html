@@ -12,6 +12,15 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="h-full w-full flex flex-col bg-[#ccffaa] text-[#229922]">
+    <div class = "language-select">
+      <label for="lang">Alphabet: </label>
+      <select name="lang" id="dropdown" class="light">
+        <option value="ethoslab">ethoslab</option>
+        <option value="ateijelo">ateijelo</option>
+        <option value="dms_akshat">dms_akshat</option>
+        <option value="homewood" selected="selected">homewood</option>
+      </select>
+    </div>
     <h1 class="text-3xl font-thin text-center mt-4">Slabsprak</h1>
     <div class="h-full flex flex-col justify-around items-center">
       <input
@@ -26,12 +35,11 @@
         <div id="output"></div>
       </div>
     </div>
-    <footer class="p-3 flex flex-col">
+    <footer class="p-3 flex">
       <a
         href="https://github.com/FHomewood/Slabsprak"
         class="flex gap-1 items-center"
-        ><img width="20" height="20" src="./github-mark.svg" />GitHub</a
-      >
+        ><img width="20" height="20" src="./github-mark.svg" />GitHub</a>
     </footer>
     <script src="script.js"></script>
   </body>

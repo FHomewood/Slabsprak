@@ -16,3 +16,10 @@
 .no-outline {
   outline: none;
 }
+.language-select{
+  position: absolute;
+  left:0px;
+  top: 0px;
+
+  padding: 10px;
+}
